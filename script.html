@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Journey of Physics - UIN Raden Intan Lampung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Splash / Landing Screen -->
+  <div id="splash" class="splash">
+    <div class="splash-inner">
+      <img
+        src="logo-kampus.png"
+        alt="Logo UIN Raden Intan Lampung"
+        class="splash-logo"
+      />
+      <h1>Journey of Physics</h1>
+      <p>
+        Media Pembelajaran Interaktif<br />
+        <span>UIN Raden Intan Lampung</span>
+      </p>
+      <button id="enterBtn" class="primary-btn splash-btn" type="button">
+        Mulai Perjalanan
+      </button>
+    </div>
+  </div>
+
+  <!-- Header utama -->
+  <header class="app-header">
+    <div class="branding">
+      <img
+        src="logo-kampus.png"
+        alt="Logo UIN Raden Intan Lampung"
+        class="logo-img"
+      />
+      <div>
+        <h1>Journey of Physics</h1>
+        <p>Media Pembelajaran Interaktif – UIN Raden Intan Lampung.</p>
+      </div>
+    </div>
+    <button id="resetProgressBtn" class="ghost-btn" type="button">
+      Reset Progress
+    </button>
+  </header>
+
+  <main class="app-main">
+    <section class="intro-card">
+      <h2>Selamat datang, Penjelajah Ilmu!</h2>
+      <p>
+        Setiap blok pada peta ini mewakili satu peradaban penting dalam sejarah fisika.
+        Buka bloknya, pelajari materinya, jawab tantangannya. Jika jawabanmu benar,
+        level selanjutnya akan terbuka sampai kamu mencapai
+        <strong>Harta Karun Ilmu Fisika</strong>.
+      </p>
+
+      <!-- Info kelompok & mata kuliah -->
+      <div class="intro-grid">
+        <div class="intro-group">
+          <h3>Kelompok 1</h3>
+          <ul>
+            <li>Ahmad Rafli Zafran Yassar       2511090001</li>
+            <li>Lola                            2511090029</li>
+            <li>Meysha Diwanda                  25110900</li>
+            <li>Tarisa Ayu Aulia                2511090048</li>
+            <li>Uut Naila Afifa Wulandari       2511090051</li>
+          </ul>
+        </div>
+
+        <div class="intro-course">
+          <h3>Informasi Mata Kuliah</h3>
+          <p><strong>Mata kuliah:</strong> Sejarah Fisika</p>
+          <div class="lecturer-card">
+            <img
+              src="vandan-wiliyanti.png"
+              alt="Foto Vandan Wiliyanti, S.Pd, M.Si"
+              class="lecturer-photo"
+            />
+            <div>
+              <p class="lecturer-name">Vandan Wiliyanti, S.Pd, M.Si</p>
+              <p class="lecturer-label">Dosen Pengampu</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-meta">
+        <div class="score-pill">
+          Skor: <span id="scoreValue">0</span> poin
+        </div>
+        <div class="tag-pill">
+          Mode: Belajar Interaktif
+        </div>
+      </div>
+
+      <div class="progress-wrapper">
+        <div class="progress-label">
+          <span>Progres perjalanan</span>
+          <span id="progressText">0 / 4 level terselesaikan</span>
+        </div>
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <h2>Peta Perjalanan</h2>
+      <p class="map-subtitle">
+        Mulai dari Babilonia dan jelajahi hingga fisika modern. Klik blok yang tersedia untuk memulai.
+      </p>
+      <div id="mapGrid" class="map-grid">
+        <!-- Level cards di-generate dari script.js -->
+      </div>
+
+      <!-- Banner harta karun (muncul kalau semua level selesai) -->
+      <div id="treasureBanner" class="treasure-banner hidden">
+        <div class="treasure-icon">🏆</div>
+        <div class="treasure-text">
+          <h3>Harta Karun Ilmu Fisika Tercapai!</h3>
+          <p>
+            Kamu sudah menaklukkan semua level: Babilonia, Yunani Kuno,
+            Arab/Islam, dan Fisika Modern.
+          </p>
+          <p id="treasureScoreText"></p>
+          <button
+            id="showResultsBtn"
+            class="secondary-btn results-btn"
+            type="button"
+          >
+            Lihat Ringkasan Hasil
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Level -->
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Tutup">
+        &times;
+      </button>
+      <div class="modal-header">
+        <h3 id="modalTitle">Level Title</h3>
+        <span id="modalBadge" class="level-badge"></span>
+      </div>
+      <div class="modal-body">
+        <section class="modal-section">
+          <h4>Materi Singkat</h4>
+          <p id="modalContent"></p>
+        </section>
+
+        <section class="modal-section">
+          <h4>Tantangan</h4>
+          <p id="modalQuestion"></p>
+          <div id="optionsContainer" class="options-container">
+            <!-- Opsi soal diisi dari script.js -->
+          </div>
+          <p id="feedbackText" class="feedback-text"></p>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button id="retryBtn" class="secondary-btn" type="button">
+          Coba Lagi
+        </button>
+        <button id="nextLevelBtn" class="primary-btn" type="button">
+          Lanjut Level Berikutnya
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ringkasan Hasil -->
+  <div id="resultsOverlay" class="modal-overlay hidden">
+    <div class="modal results-modal">
+      <button
+        class="modal-close"
+        id="resultsCloseBtn"
+        aria-label="Tutup ringkasan"
+      >
+        &times;
+      </button>
+      <div class="modal-header">
+        <h3>Ringkasan Hasil Belajar</h3>
+      </div>
+      <div class="modal-body">
+        <p id="resultsSummary" class="results-summary"></p>
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Peradaban</th>
+              <th>Status</th>
+              <th>Skor Level</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody">
+            <!-- Diisi lewat JS -->
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="resultsCloseBtnBottom"
+          class="primary-btn"
+          type="button"
+        >
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <small>
+      &copy; 2025 Journey of Physics · Media pembelajaran interaktif - Kelompok 5 - UIN Raden
+      Intan Lampung.
+    </small>
+  </footer>
+
+  <!-- Audio efek -->
+  <audio id="soundClick" src="click.mp3" preload="auto"></audio>
+  <audio id="soundCorrect" src="correct.mp3" preload="auto"></audio>
+  <audio id="soundWrong" src="wrong.mp3" preload="auto"></audio>
+  <audio id="soundTreasure" src="treasure.mp3" preload="auto"></audio>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
